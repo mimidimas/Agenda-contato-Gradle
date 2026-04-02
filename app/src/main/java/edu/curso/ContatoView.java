@@ -47,7 +47,7 @@ public class ContatoView {
                     break;
 
                     case 2: 
-                        remover(c.getId());
+                        remover();
                     break;
                     case 3:
                         editar(c.getId());
@@ -56,7 +56,7 @@ public class ContatoView {
                         listar();
                     break;
                     case 5:
-                        procurar(c.getId());
+                        procurar();
                     break;
                     case 9:
                     break;
@@ -97,13 +97,14 @@ public class ContatoView {
 
     }
 
-    public void remover(long id){
+    public void remover(){
     	System.out.println("Digite o Id do número que você deseja remover:");
         long n = scan.nextLong();
 
         for(Contato c : lista){
             if(c.getId() == n){
                 lista.remove(c);
+                break;
             }
         }
         System.out.println("O numero do Id " + n + " foi removido");
@@ -127,13 +128,13 @@ public class ContatoView {
         }
     }
 
-    public void procurar(long id){
+    public void procurar(){
         Boolean encontrado = false;
         System.out.println("Digite o id do número que deseja procurar: ");
-        Long idProcurar = scan.nextLong();
+        long idProcurar = scan.nextLong();
     	for(Contato c : lista){
             
-            if (idProcurar.equals(id)){
+            if (idProcurar == c.getId()){
                 System.out.println("");
                 System.out.println("ID: " + c.getId());
                 System.out.println("Nome: " + c.getNome());
