@@ -11,6 +11,7 @@ public class ContatoView {
     Contato c = new Contato();
     private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private ArrayList<Contato> lista = new ArrayList<>();
+    static long idContador = 0;
 
     public static void main(String[] args) {
         ContatoView view = new ContatoView();
@@ -27,13 +28,17 @@ public class ContatoView {
             5 - Procurar contato
             9 - Finalizar
                 
-            Digite a opcao desejada""";
+            Digite a opcao desejada:
+            """;
+        
             int n = 0;
 
             while(n!=9){
                 System.out.println("G E S T A O  D E  C O N T A T O S");
+                System.out.println("");
                 System.out.println(menu);
-                n = Integer.parseInt(scan.nextLine());
+                n = scan.nextInt();
+                scan.nextLine();
                 try{
 
                     switch(n){
@@ -42,16 +47,18 @@ public class ContatoView {
                     break;
 
                     case 2: 
-                        remover();
+                        remover(c.getId());
                     break;
                     case 3:
-                        editar();
+                        editar(c.getId());
                     break;
                     case 4:
                         listar();
                     break;
                     case 5:
-                        procurar();
+                        procurar(c.getId());
+                    break;
+                    case 9:
                     break;
                     default:
                         System.err.println( "Erro: Escolha uma opcao valida" );
@@ -64,6 +71,10 @@ public class ContatoView {
     }
 
     public void cadastrar(){
+        Contato c = new Contato();
+        idContador = idContador + 1;
+        c.setId(idContador);
+        
         System.out.println("C A D A S T R A R  C O N T A T O");
         System.out.println("Digite o nome: ");
         String nome = scan.nextLine();
@@ -86,25 +97,56 @@ public class ContatoView {
 
     }
 
-    public void remover(){
+    public void remover(long id){
+    	System.out.println("Digite o Id do número que você deseja remover:");
+        long n = scan.nextLong();
 
+        for(Contato c : lista){
+            if(c.getId() == n){
+                lista.remove(c);
+            }
+        }
+        System.out.println("O numero do Id " + n + " foi removido");
     }
 
-    public void editar(){
+    public void editar(long id){
 
     }
 
     public void listar(){
-        for(c : lista){
-            System.out.println(c.getNome());
-            System.out.println(c.getTelefone());
-            System.out.println(c.getEmail());
-            System.out.println(c.getNascimento());
+    	if(lista.isEmpty()) {
+    		System.out.println("Não possuí nenhum contato salvo na agenda");
+    	}
+    	
+        for(Contato c : lista){
+            System.out.println("ID: " + c.getId());
+            System.out.println("Nome: " + c.getNome());
+            System.out.println("Telefone: " + c.getTelefone());
+            System.out.println("Email: " + c.getEmail());
+            System.out.println("Data de nascimento: "+ c.getNascimento());
         }
     }
 
-    public void procurar(){
-
+    public void procurar(long id){
+        Boolean encontrado = false;
+        System.out.println("Digite o id do número que deseja procurar: ");
+        Long idProcurar = scan.nextLong();
+    	for(Contato c : lista){
+            
+            if (idProcurar.equals(id)){
+                System.out.println("");
+                System.out.println("ID: " + c.getId());
+                System.out.println("Nome: " + c.getNome());
+                System.out.println("Telefone: " + c.getTelefone());
+                System.out.println("Email: " + c.getEmail());
+                System.out.println("Data de nascimento: "+ c.getNascimento());
+                encontrado = true;
+            }
+        }
+        if(!encontrado){
+            System.out.println("O Id não está na lista de contato!");
+        }
+        
     }
     
 }
