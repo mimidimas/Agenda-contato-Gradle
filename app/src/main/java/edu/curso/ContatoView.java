@@ -31,13 +31,15 @@ public class ContatoView {
                 
             Digite a opcao desejada:
             """;
-        
             int n = 0;
 
             while(n!=9){
                 System.out.println("G E S T A O  D E  C O N T A T O S");
                 System.out.println("");
+                System.out.println("");
                 System.out.println(menu);
+                n = scan.nextInt();
+                scan.nextLine();
                 n = scan.nextInt();
                 scan.nextLine();
                 try{
@@ -51,6 +53,7 @@ public class ContatoView {
                         remover(c.getId());
                     break;
                     case 3:
+                        editar(c.getId());
                         editar(c.getId());
                     break;
                     case 4:
@@ -107,7 +110,7 @@ public class ContatoView {
                 lista.remove(c);
             }
         }
-        System.out.println("O numero do Id " + n + " foi removido");
+        System.out.println("O contato do Id " + n + " foi removido");
     }
 
     public void editar(long id){
@@ -151,6 +154,9 @@ public class ContatoView {
             System.out.println("Telefone: " + c.getTelefone());
             System.out.println("Email: " + c.getEmail());
             System.out.println("Data de nascimento: "+ c.getNascimento());
+    	    if(lista.isEmpty()) {
+    		    System.out.println("Não possuí nenhum contato salvo na agenda");
+    	    }
         }
     }
 
