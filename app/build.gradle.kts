@@ -4,7 +4,6 @@
  * This generated file contains a sample Java application project to get you started.
  * For more details on building Java & JVM projects, please refer to https://docs.gradle.org/9.3.1/userguide/building_java_projects.html in the Gradle documentation.
  */
-
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
@@ -20,7 +19,6 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
 
     // This dependency is used by the application.
-    implementation("com.google.guava:guava:31.1-jre")
 
     implementation("com.google.guava:guava:31.1-jre")
 }
@@ -34,7 +32,7 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = "edu.curso.ContatoView"
+    mainClass = "boundary.PedidoBoundary"
 }
 
 tasks.withType<JavaExec> {
